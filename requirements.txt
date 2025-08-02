@@ -1,0 +1,12 @@
+flask
+language-tool-python
+sentence-transformers
+nltk
+python-dotenv
+pandas
+scikit-learn
+npm init -y
+npm install dotenv
+npm install dotenv @azure-rest/ai-inference @azure/core-auth
+
+

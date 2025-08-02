@@ -1,0 +1,54 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env/
+*.env
+
+# Logs and cache
+*.log
+*.sqlite3
+*.db
+*.csv~
+*.bak
+.DS_Store
+
+# NLTK data
+nltk_data/
+
+# === Flask ===
+instance/
+*.db
+*.sqlite
+*.pid
+
+# === Node.js (for GPT relevance) ===
+node_modules/
+package-lock.json
+
+# === Models & Data ===
+adaptive_module/model_b_full_labels.csv
+adaptive_module/next_complexity_model.pkl
+
+# === IDEs ===
+.vscode/
+.idea/
+
+# === OS-specific ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Test outputs ===
+*.out
+*.err
+*.tmp
