@@ -5,8 +5,13 @@ nltk
 python-dotenv
 pandas
 scikit-learn
+flask_cors
+esprima
+javalang
+
+
+
 npm init -y
 npm install dotenv
 npm install dotenv @azure-rest/ai-inference @azure/core-auth
-
 
