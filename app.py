@@ -24,6 +24,7 @@ from Module_1.github_utils.github_api import get_user_repos, get_java_js_files, 
 from Module_1.algorithm_detection.detector import analyze_git_commit_chunk
 from Module_1.extractors.similarity_checker import compute_code_similarity
 from Module_1.extractors.graph_semantic_similarity import GraphSemanticSimilarity
+from Coding_Question.code_question_gpt import generate_question_and_refs
 
 load_dotenv()
 
@@ -451,6 +452,39 @@ def assess():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/api/generate_question", methods=["POST"])
+def generate_coding_question():
+    data = request.get_json()
+    algo_summary = data.get("algorithm_detection_summary", [])
+    experience_level = data.get("experience_level", "intern")
+    language = data.get("language", "Java")  # default fallback
+
+    output = []
+
+    for repo_data in algo_summary:
+        repo_name = repo_data.get("repo")
+        algorithms = repo_data.get("algorithms_detected", [])
+
+        # Infer language from repo name or metadata (you can improve this logic)
+        repo_lang = "JavaScript" if "js" in repo_name.lower() else language
+
+        for algo in algorithms:
+            try:
+                result = generate_question_and_refs(algo, experience_level, repo_lang)
+                result["repo"] = repo_name
+                result["algorithm"] = algo
+                output.append(result)
+            except Exception as e:
+                output.append({
+                    "repo": repo_name,
+                    "algorithm": algo,
+                    "error": str(e)
+                })
+
+    return jsonify({
+        "username": data.get("username", ""),
+        "generated_questions": output
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)
